@@ -1,0 +1,28 @@
+#ANCHOR Sign Up Route
+POST http://localhost:5000/api/users/sign_up
+Content-Type: application/json
+
+{
+    "userName":"Michael Jackson",
+    "email":"michaelJackson@gmail.com",
+    "password":"ali123ali123",
+    "userImage":"ali.png"
+}
+
+###
+#ANCHOR Login Route
+POST http://localhost:5000/api/users/login
+Content-Type: application/json 
+
+{
+    "email":"michaelJackson@gmail.com",
+    "password":"ali123ali123"
+}
+### 
+#ANCHOR GET Users Route
+GET http://localhost:5000/api/users
+
+###
+
+# ANCHOR Get one user Route
+GET http://localhost:5000/api/users/James%20Bond

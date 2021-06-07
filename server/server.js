@@ -14,7 +14,9 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     useFindAndModify: true
 })
 
-
+mongoose.connection.once('open', () => {
+    console.log('connected to the database')
+})
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/uploads', express.static('public/images'))

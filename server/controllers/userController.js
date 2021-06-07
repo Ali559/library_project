@@ -1,6 +1,6 @@
 import User from '../models/user.js'
-
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken';
 const userController = {
     getAll: (req, res) => {
         User.find().then(users => {
@@ -11,12 +11,8 @@ const userController = {
         })
     },
     getOne: (req, res) => {
-        const { userName } = req.params;
-        User.findOne({ userName }).then(user => {
-            user ? res.status(201).json(user) : res.status(404).json({ msg: 'User not found' })
-        }).catch(err => {
-            res.json({ msg: err.message })
-            return;
+        jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, (err, authData) => {
+            (err) ? res.status(403).json({ msg: err.message }) : res.status(201).json(authData.user)
         })
     },
     edit: (req, res) => {
@@ -32,38 +28,23 @@ const userController = {
             })
     },
     signUp: async (req, res) => {
-        const { userName, email, password, userImage } = req.body;
-        const userNameExists = await User.findOne({ userName })
-        const userExists = await User.findOne({ email })
-        if (userExists) {
-            res.status(401).json({ msg: 'User already exists' })
-            return;
-        }
-        if (userNameExists) {
-            res.status(401).json({ msg: 'userName is taken' })
-            return;
-        }
-        User.create({
-            userName,
-            email,
-            password,
-            userImage
-        }).then(() => {
-            res.status(201).json({ msg: 'User Created' })
-        }).catch(err => {
-            res.status(500).json({ msg: err.message })
-        })
 
     },
     login: (req, res) => {
         const { email, password } = req.body;
-        User.findOne({ email }).then(user => {
-            if (user.comparePasswords(password)) {
-                res.status(201).json({ msg: 'User Logged in' })
-            }
-        }).catch(err => {
-            res.status(400).json({ msg: err.stack })
-        })
+        User.findOne({ email })
+            .then(user => {
+                if (!user.comparePasswords(password)) {
+                    res.status(400).json({ msg: 'Incorrect Password' })
+                    return;
+                }
+                jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+                    (err) ? res.status(401).json(err.stack) :
+                        res.status(200).json({ token })
+                })
+            }).catch(err => {
+                res.status(400).json({ msg: err.stack })
+            })
     }
 }
 

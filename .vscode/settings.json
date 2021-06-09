@@ -2,6 +2,10 @@
   "files.exclude": {
     ".vscode": true,
     "server\\node_modules": true,
-    "server\\package-lock.json": true
+    "server\\package-lock.json": true,
+    "client\\node_modules": true,
+    "client\\package-lock.json": true,
+    "client\\README.md": true,
+    "client\\public": true
   }
 }

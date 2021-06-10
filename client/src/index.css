@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap');
-
-*,*::after,*::before{
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
 }
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Mukta', monospace,sans-serif;
-  font-size: 1rem;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	background: #24252a;
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', monospace, sans-serif;
+	font-size: 1rem;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
-
-

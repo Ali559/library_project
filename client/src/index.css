@@ -1,15 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 *,
 *::after,
 *::before {
 	box-sizing: border-box;
 }
-body {
-	background: #24252a;
+body,
+html {
+	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
 	font-family: 'Poppins', monospace, sans-serif;
 	font-size: 1rem;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+	width: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #909090;
+	border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #404040;
+}
+
+@media screen and (max-width: 48em) {
+	:root {
+		font-size: .6rem;
+	}
+}
+@media screen and (max-width: 26.5625em) {
+	:root {
+		font-size: .5rem;
+	}
 }
